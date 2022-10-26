@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Smart Phone Store</title>
+
+    <script src="./A1products.js"></script>
+
+    <link href="products_style12.css" rel="stylesheet">
+    <script>
+        var store_name = "Zachary Matsudo";
+    </script>
+
+
+</head>
+
+<body>
+    
+    <header>
+        <h1> 
+            <script> 
+            document.write(store_name+" Candy Store ")
+            </script>
+        </h1>
+        <p style="text-align: center; font-weight: bold;">
+            </p>
+            
+
+    </header>
+    <div>
+        <aside>
+            <div style="font-size:4rem;text-align:center;font-weight: bold;font-style: italic; color: white">
+                We sell from
+                around the globe!
+            </div>
+        </aside>
+
+        <main>
+            
+            
+
+        <script>
+            for (i = 0; i < products.length; i++) {
+        document.write(`
+        <section class ="item">
+            <h2>${products[i].brand}</h2>
+            <p>$${products[i].price}
+            <p2>${products[i].description}</p2>
+            ${products[i].quantity_available}</p>
+        </section>
+            
+        `);
+    };
+        </script>
+
+        </main>
+    </div>
+    <footer>
+        <h1>
+            Your One Stop For Used Phones 
+            <script>
+                document.write(store_name)
+            </script>
+        </h1>
+        
+    </footer>
+</body>
+
+</html>

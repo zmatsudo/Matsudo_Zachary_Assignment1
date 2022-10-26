@@ -1,0 +1,43 @@
+
+
+[
+ {
+    "brand": "Skittles",
+    "price": 2.00,
+    "image": "skittles.jpg",
+    "description": "3.5oz bag",
+    "quantity_available": 20
+},
+
+{
+    "brand": "M&Ms",
+    "price": 2.50,
+    "image": "",
+    "description": "4oz bag",
+    "quantity_available": 15
+},
+
+{
+    "brand": "Sour Patch Kids",
+    "price": 3.00, 
+    "image": "",
+    "description": "3.5oz bag",
+    "quantity_available": 10
+},
+
+{
+    "brand": "Starburst",
+    "price": 4.25,
+    "image": "",
+    "description": "5oz bag",
+    "quantity_available": 7
+},
+
+{
+    "brand": "Haribo Gummy Bears",
+    "price": 5.00,
+    "image": "",
+    "description": "8oz bag",
+    "quantity_available": 5
+}
+]

@@ -37,9 +37,11 @@
         <section class ="item">
             <h2>${products[i].brand}</h2>
             <p>$${products[i].price}</p>
-            <img src="${products[i].image}"
+            <img src="${products[i].image}">
             <div class="product_description">${products[i].description}</div>
             <div class="product_available">${products[i].quantity_available}</div>
+            <input type="text" name="quantity${i}">
+
 
 
         </section>

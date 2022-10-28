@@ -1,10 +1,8 @@
-
-
 [
  {
     "brand": "Skittles",
     "price": 2.00,
-    "image": "skittles.jpg",
+    "image": "https://github.com/zmatsudo/Matsudo_Zachary_Assignment1/blob/main/images/skittles.jpg",
     "description": "3.5oz bag",
     "quantity_available": 20
 },
@@ -39,5 +37,14 @@
     "image": "",
     "description": "8oz bag",
     "quantity_available": 5
+},
+
+{
+    "brand": "Nerds Gummy Clusters",
+    "price": 5.00,
+    "image": "",
+    "description": "8oz bag",
+    "quantity_available": 5
 }
+
 ]

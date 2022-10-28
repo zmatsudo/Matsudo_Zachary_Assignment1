@@ -5,16 +5,15 @@
     <meta charset="utf-8">
     <title>Smart Phone Store</title>
 
-    <script src="./A1products.js"></script>
+    <script src="./product_data.js" type="text/javascript"></script> 
 
-    <link href="products_style12.css" rel="stylesheet">
+    <link href="style_home.css" rel="stylesheet">
     <script>
         var store_name = "Zachary Matsudo";
     </script>
 
 
 </head>
-
 <body>
     
     <header>
@@ -23,18 +22,10 @@
             document.write(store_name+" Candy Store ")
             </script>
         </h1>
-        <p style="text-align: center; font-weight: bold;">
-            </p>
-            
 
     </header>
     <div>
-        <aside>
-            <div style="font-size:4rem;text-align:center;font-weight: bold;font-style: italic; color: white">
-                We sell from
-                around the globe!
-            </div>
-        </aside>
+       
 
         <main>
             
@@ -45,9 +36,12 @@
         document.write(`
         <section class ="item">
             <h2>${products[i].brand}</h2>
-            <p>$${products[i].price}
-            <p2>${products[i].description}</p2>
-            ${products[i].quantity_available}</p>
+            <p>$${products[i].price}</p>
+            <img src="${products[i].image}"
+            <div class="product_description">${products[i].description}</div>
+            <div class="product_available">${products[i].quantity_available}</div>
+
+
         </section>
             
         `);
@@ -58,10 +52,7 @@
     </div>
     <footer>
         <h1>
-            Your One Stop For Used Phones 
-            <script>
-                document.write(store_name)
-            </script>
+            Get Your Candy!
         </h1>
         
     </footer>

@@ -1,0 +1,44 @@
+[
+ {
+    "brand": "Skittles",
+    "price": 2.00,
+    "image": "skittles.jpg",
+    "quantity_available": 20
+},
+
+{
+    "brand": "M&Ms",
+    "price": 2.50,
+    "image": "mnm1.jpg",
+    "quantity_available": 15
+},
+
+{
+    "brand": "Sour Patch Kids",
+    "price": 3.00, 
+    "image": "sourpatch.jpeg",
+    "quantity_available": 10
+},
+
+{
+    "brand": "Starburst",
+    "price": 4.25,
+    "image": "star.jpeg",
+    "quantity_available": 7
+},
+
+{
+    "brand": "Gummy Bears",
+    "price": 5.00,
+    "image": "haribo.jpeg",
+    "quantity_available": 5
+},
+
+{
+    "brand": "Airheads",
+    "price": 10.00,
+    "image": "airheads.jpeg",
+    "quantity_available": 50
+}
+
+]

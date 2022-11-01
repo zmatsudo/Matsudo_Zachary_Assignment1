@@ -26,21 +26,28 @@ product4 = {
     brand: "Starburst",
     price: 4.25,
     image: "star.jpeg",
-    quantity_available: 7
+    quantity_available: 20
 },
 
 product5 = {
     brand: "Gummy Bears",
     price: 5.00,
     image: "haribo.jpeg",
-    quantity_available: 5
+    quantity_available: 20
 },
 
 product6 = {
     brand: "Airheads",
-    price: 10.00,
+    price: 5.00,
     image: "airheads.jpeg",
-    quantity_available: 70
+    quantity_available: 15
+},
+
+product7 = {
+    brand: "Nerds",
+    price: 3.50,
+    image: "nerds.jpeg",
+    quantity_available: 20
 };
 
-products = [product1, product2, product3, product4, product5, product6];
+products = [product1, product2, product3, product4, product5, product6, product7];

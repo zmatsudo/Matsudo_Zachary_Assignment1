@@ -4,7 +4,7 @@
 /* Function is from the Function Lab. This is used to check if the input is a postive while number. 
 Negative values, decimals, letters and other characters will output an error message */
 
-  function  isNonNegInt (input, returnErrors = false) {
+  function  isNonNegativeInteger (input, returnErrors = false) {
       errors = []; // assume no errors at first
   if(Number(input) != input) errors.push('Not a number!'); // Check if string is a number value
   if(input < 0) errors.push('Negative value!'); // Check if it is non-negative
@@ -29,20 +29,23 @@ Negative values, decimals, letters and other characters will output an error mes
         continue;
       }
 
-    /* From Invoice 3 WOD. If valid quantity is entered then the extended price will be included in the sub-total.
-    If there is an invalid quantity then the extended price will be equal to 0.
+    /* From Invoice 3 WOD. If valid quantity is entered then the Cart Total will be included in the sub-total.
+    If there is an invalid quantity then the Cart Total will be equal to 0.
     Document.write portion displays the product information on the invoice table.  */
-      returnErrors = isNonNegInt(quantities[i], true);
-        if (isNonNegInt(quantities[i]) == true) {
-       extended_price = product_quantities_array[i] * products[i].price;
-      (subtotal += extended_price)
-        } else {extended_price = 0};
+      returnErrors = isNonNegativeInteger(quantities[i], true);
+        if (isNonNegativeInteger(quantities[i]) == true) {
+       cart_total = product_quantities_array[i] * products[i].price;
+      (subtotal += cart_total)
+        } else {cart_total = 0};
+        /* My Individual requirement 5 is in the document write below. I made another table cell to display the image of the product 
+        if the item is bought. I had to use ${products[i].image} to grab the image from the JSON file. */
       document.write(`
     <tr>
-      <td width="43%">${products[i].brand} <img src="./images/${products[i].image}"> </td>
-      <td align="center" width="11%">${quantities[i]}<br><div style="color:red;">${returnErrors.join("<br>")}</div></td>
-      <td width="13%">\$${products[i].price}</td>
-      <td width="54%">\$${extended_price}</td>
+      <td width="20%">${products[i].brand}</td>
+      <td width="10%"><img src="./images/${products[i].image}"></td>
+      <td align="center" width="10%">${quantities[i]}<br></td>
+      <td width="15%">\$${products[i].price}</td>
+      <td width="45%">\$${cart_total}</td>
     </tr>
     `);
   }
@@ -79,23 +82,24 @@ Negative values, decimals, letters and other characters will output an error mes
 
 
 <header>
-  <center><h1> Receipt </h1> </center>
+  <center><h1> Cart Summary </h1> </center>
 </header>
 
 <body>
 <table border="5" class="table1">
   <tbody>
     <tr>
-      <th style="text-align: center;" width="43%">Item</th>
-      <th style="text-align: center;" width="11%">Quantity</th>
-      <th style="text-align: center;" width="13%">Price</th>
-      <th style="text-align: center;" width="54%">Extended Price</th>
+      <th style="text-align: center;" width="20%">Item</th>
+      <th style="text-align: center;" width="10%"> Image </th>
+      <th style="text-align: center;" width="10%">Quantity</th>
+      <th style="text-align: center;" width="15%">Price</th>
+      <th style="text-align: center;" width="45%">Cart Total</th>
     </tr>   
 
 <script>
 
 // Shows what product information should be displayed with each product number.
-products = [product1, product2, product3, product4, product5, product6]; 
+products = [product1, product2, product3, product4, product5, product6, product7]; 
 
 // From Store 1 WOD. Takes the generate_item_rows function from above and displays the data in the invoice table.
   generate_item_rows(quantities);
@@ -106,7 +110,7 @@ products = [product1, product2, product3, product4, product5, product6];
 
     // Compute Shipping. Referenced from invoice 2 WOD. 
     //Orders less than $10 will have free shipping, from $11-$30 shipping is $2.50 and any order over $30 is $5 shipping.
-    if(subtotal <= 10) {
+    if(subtotal <= 15) {
       shipping = 0;
     }
     else if(subtotal <= 30) {
@@ -122,29 +126,37 @@ products = [product1, product2, product3, product4, product5, product6];
       
 
 </script>
- <!-- Referenced from Store 1 WOD and is used to display the sub-total, tax, shipping costs and total. -->
+</table>
 
+<br>
+
+<h2>
+  Payment Summary
+</h2>
+<table class="table2">
+ <!-- Referenced from Store 1 WOD and is used to display the sub-total, tax, shipping costs and total. 
+ sub-total, tax, shipping and total are called using document.write and toFixed used to have it display 2 decimal places-->
     <tr>
-      <td style="text-align: center;" colspan="3" width="67%">Sub-total</td>
-      <td width="54%">$<script>document.write(subtotal);</script></td>
+      <td style="text-align: center;" width="50%">Sub-total</td>
+      <td>$<script>document.write(subtotal);</script></td>
     </tr>
     <tr>
-      <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Tax @ <script>document.write(100*tax_rate);</script></span></td>
-      <td width="54%">$<script>document.write(tax.toFixed(2));</script></td>
+      <td style="text-align: center;" width="50%">Tax @ <script>document.write(100*tax_rate);</script>%</td>
+      <td>$<script>document.write(tax.toFixed(2));</script></td>
     </tr>
     <tr>
-      <td style="text-align: center;" colspan="3" width="67%"><span style="font-family: arial;">Shipping </span></td>
-      <td width="54%">$<script>document.write(shipping.toFixed(2));</script></td>
+      <td style="text-align: center;" width="50%">Shipping</td>
+      <td>$<script>document.write(shipping.toFixed(2));</script></td>
     </tr>
     <tr>
-      <td style="text-align: center;" colspan="3" width="67%"><strong>Total</strong></td>
-      <td width="54%"><strong>$<script>document.write(total.toFixed(2));</script></strong></td>
+      <td style="text-align: center;" width="50%"><strong>Total</strong></td>
+      <td><strong>$<script>document.write(total.toFixed(2));</script></strong></td>
     </tr>
   </tbody>
 </table>
 <div id="ship_memo">
   <b> <br>
-   <center>Zachary Matsudo Candy Store Shipping Prices : <br> Orders under $10 are free! Orders between $11-$30 will have a $2.50 shipping cost and orders over $30 will have $5 shipping </center>
+   <center>Zachary Matsudo Candy Store Shipping Prices : <br> Orders $15 and under are free! Orders between $16-$30 will have a $2.50 shipping cost and orders over $30 will have $5 shipping </center>
   </b>
 </div>
 </body>

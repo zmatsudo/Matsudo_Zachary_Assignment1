@@ -2,16 +2,27 @@ var products_array = require(__dirname + '/product_data.json');
 
 var express = require('express');
 var app = express();
+const querystring = require('node:querystring');
+app.use(express.urlencoded({ extended: true }));
 
-/* Functions referenced from Lab 8 (IsNonNegInt) */
-function isNonNegInt(queryString, returnErrors = false) {
-    errors = []; // assume no errors at first
-    if (Number(queryString) != queryString) errors.push('Not a number!'); // Check if string is a number value
-    if (queryString < 0) errors.push('Negative value!'); // Check if it is non-negative
-    if (parseInt(queryString) != queryString) errors.push('Not an integer!'); // Check that it is an integer
-    return returnErrors ? errors : (errors.length == 0);
-}
+/* Functions referenced from Lab 8 (IsNonNegInt). This is used to check if the input is a postive while number. 
+Negative values, decimals, letters and other characters will output an error message*/
+  function  isNonNegativeInteger (queryString, returnErrors = false) {
+      errors = []; // assume no errors at first
+  if(Number(queryString) != queryString) errors.push('Not a number!'); // Check if string is a number value
+  if(queryString < 0) errors.push('Negative value!'); // Check if it is non-negative
+  if(parseInt(queryString) != queryString) errors.push('Not an integer!'); // Check that it is an integer
 
+  if (returnErrors) {
+      return errors;
+  }
+  else if (errors.length == 0) {
+      return true;
+  }
+  else {
+      return false;
+  }
+  };
 // Routing 
 
 // monitor all requests
@@ -20,21 +31,27 @@ app.all('*', function (request, response, next) {
    next();
 });
 
-// process purchase request (validate quantities, check quantity available)
-app.post("/Purchase", function (request, response) {
-    // 
-    let valid = true;
-    let ordered = "";
+    // process purchase request (validate quantities, check quantity available)
+    // This was referenced from Lab 13 and also referenced Professor Kazmans Lab 13 repo.
+    // This is used to check the quantity that is entered into the ${quantity[i]} textboxes
+    // If a valid quantity is entered then the user is taken to the invoice page and the quantity entered in the textbox is displayed on the table
+    // If an invalid quantity is entered then the user will still be at the home page with the error message in the querystring
 
+app.post("/Purchase", function (request, response, next) {
+    var q;
+    var text_qty = false;
     for (i = 0; i < products_array.length; i++) {
-       if(isNonNegInt) {
-        response.redirect('home.html');
-       } else {
-        response.redirect('invoice.html');
-       }
+        q = request.body['quantity' + i];
+        if (typeof q != 'undefined') {
+            text_qty = text_qty || (q > 0);
         }
     }
-);
+    if (text_qty == true) {
+        response.redirect("./invoice.html?" + querystring.stringify(request.body));
+    } else {
+        response.redirect("./home.html?" + querystring.stringify(request.body) + `&error=You need to select something!`);
+    }
+});
 
 // route all other GET requests to files in public 
 app.use(express.static(__dirname + '/public'));

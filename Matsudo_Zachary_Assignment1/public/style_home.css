@@ -65,9 +65,8 @@ body > div {
   }
 
 .item {
-    padding-left: 50px;
-    padding-top: 30px;
-    padding-bottom: 50PX;
+    margin: auto;
+    padding-bottom: 50px;
 }
 
 .item img {

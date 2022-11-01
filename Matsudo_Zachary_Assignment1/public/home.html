@@ -11,8 +11,25 @@
     <script>
         var store_name = "Zachary Matsudo";
 
-        function checkQuantityTextbox(the_object) {
-            let input_string = the_object.value;
+    function  isNonNegativeInteger (input, returnErrors = false) {
+        errors = []; // assume no errors at first
+        if(Number(input) != input) errors.push('Not a number!'); // Check if string is a number value
+        if(input < 0) errors.push('Negative value!'); // Check if it is non-negative
+        if(parseInt(input) != input) errors.push('Not an integer!'); // Check that it is an integer
+
+        if (returnErrors) {
+            return errors;
+        }
+        else if (errors.length == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+        };
+
+    function checkQuantityTextbox(the_object) {
+        let input_string = the_object.value;
             let error_array = isNonNegativeInteger(input_string, true);
             if (error_array.length == 0) {
                 qty_textbox_message.innerHTML = input_string;
@@ -20,6 +37,8 @@
                 qty_textbox_message.innerHTML = error_array.join("; ");
             }
         }
+
+
     </script>
 
 
@@ -38,7 +57,7 @@
     
     <div>
 
-        <form name="quantity_form" action="./invoice.html" method="GET">
+        <form name="quantity_form" action="/Purchase" method="POST">
        
 
         <main>
@@ -47,6 +66,7 @@
 
         <script>
         /* This code was referenced from the Store 1 WOD and is used to display the products on webpage */
+        
             for (i = 0; i < products.length; i++) {
         document.write(`
         <section class ="item">
@@ -55,7 +75,7 @@
             <p>$${products[i].price}</p>
             <label id="label_description"><B>In Stock : ${products[i].quantity_available}</B></label>
             <br>
-            <input type="text" name="quantity${i}" onkeyup="checkQuantityTextbox(this);">
+            <input type="text" value="" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"></input>
         </section>
         ` );
     };
@@ -64,7 +84,7 @@
 
         </main>
    
-       
+        <center> <span id='qty_textbox_message' style="color: red;"> <strong> Get Something </strong></span> </center>
     <center> <button type="submit" value="Purchase" class="button"> Purchase </button> </center>  
     </div>
     

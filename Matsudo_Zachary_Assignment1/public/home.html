@@ -2,12 +2,15 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Smart Phone Store</title>
-
     <script src="./product_data.js" type="text/javascript"></script> 
-
+    <meta charset="UTF-8">
+    <!-- Template taken from W3 schools-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+    <!-- My own css that I created to adjsut other elements-->
     <link href="style_home.css" rel="stylesheet">
+    <title>Smart Phone Store</title>
     <script>
         var store_name = "Zachary Matsudo";
 
@@ -28,15 +31,12 @@
         }
         };
 
-    function checkQuantityTextbox(the_object) {
-        let input_string = the_object.value;
-            let error_array = isNonNegativeInteger(input_string, true);
-            if (error_array.length == 0) {
-                qty_textbox_message.innerHTML = input_string;
-            } else {
-                qty_textbox_message.innerHTML = error_array.join("; ");
-            }
-        }
+        function checkQuantityTextbox(theTextbox) {
+        errs = isNonNegInt(theTextbox.value, true);
+        if (errs.length == 0) errs = ['You want:'];
+        if (theTextbox.value.trim() == '') errs = ['Quantity'];
+        document.getElementById(theTextbox.name + '_label').innerHTML = errs.join(", ");
+    }
 
 
     </script>
@@ -55,7 +55,7 @@
     </header>
 
     
-    <div>
+    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px">
 
         <form name="quantity_form" action="/Purchase" method="POST">
        
@@ -76,6 +76,8 @@
             <label id="label_description"><B>In Stock : ${products[i].quantity_available}</B></label>
             <br>
             <input type="text" value="" name="quantity${i}" onkeyup="checkQuantityTextbox(this);"></input>
+            <br>
+            <span id='qty_textbox_message' style="color: red;"> <strong> Buy Something </strong> </span>
         </section>
         ` );
     };
@@ -84,14 +86,14 @@
 
         </main>
    
-        <center> <span id='qty_textbox_message' style="color: red;"> <strong> Get Something </strong></span> </center>
+        
     <center> <button type="submit" value="Purchase" class="button"> Purchase </button> </center>  
     </div>
     
 
 
 
-    <footer>
+    <footer class="w3-row-padding w3-padding-32">
         
         <h3>
             Best Candy on Oahu!

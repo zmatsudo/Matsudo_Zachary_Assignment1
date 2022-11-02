@@ -39,13 +39,6 @@
     "price": 5.00,
     "image": "airheads.jpeg",
     "quantity_available": 15
-},
-
-{
-    "brand": "Nerds",
-    "price": 3.50,
-    "image": "nerds.jpeg",
-    "quantity_available": 20
 }
 
 ]

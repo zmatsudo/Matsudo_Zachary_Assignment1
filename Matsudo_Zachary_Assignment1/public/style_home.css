@@ -5,7 +5,7 @@ html {
     background-color: #2396FF;
     font-size: 18px;
     background: url(https://img.freepik.com/free-photo/tasty-appetizing-party-accessories-bright-blue-background_1220-1696.jpg?w=2000) no-repeat 50% center;
-    background-size: 3000px;
+    background-size: cover;
 }
 
 body {
@@ -19,6 +19,10 @@ header {
 
 
 /* Fonts */
+
+/* From W3 schools template */
+body,h1,h2,h3 {font-family: "Karma", sans-serif}
+.w3-bar-block .w3-bar-item {padding:20px}
 
 h1 {
     font-size: 75px;
@@ -50,6 +54,10 @@ body > div {
   
 
   /* Styling Products */
+  
+  #qty_textbox_message {
+    margin-left: 29%;
+  }
 
   section h2 {
     text-align: center;

@@ -1,5 +1,3 @@
-var products_array = require(__dirname + '/product_data.json');
-
 var express = require('express');
 var app = express();
 const querystring = require('node:querystring');
@@ -23,7 +21,17 @@ Negative values, decimals, letters and other characters will output an error mes
       return false;
   }
   };
+
 // Routing 
+var products = require(__dirname + '/product_data.json');
+//monitor requests
+app.get("/product_data.js", function (request, response, next) {
+    response.type('.js');
+    var products_str = `var products = ${JSON.stringify(products)};`;
+    //Send string of data as response to requests
+    response.send(products_str);
+ });
+
 
 // monitor all requests
 app.all('*', function (request, response, next) {
@@ -32,24 +40,26 @@ app.all('*', function (request, response, next) {
 });
 
     // process purchase request (validate quantities, check quantity available)
-    // This was referenced from Lab 13 and also referenced Professor Kazmans Lab 13 repo.
+    // This was referenced from Lab 13, Professor Kazmans Lab 13 repo and https://www.geeksforgeeks.org/node-js-querystring-stringify-method/.
     // This is used to check the quantity that is entered into the ${quantity[i]} textboxes
     // If a valid quantity is entered then the user is taken to the invoice page and the quantity entered in the textbox is displayed on the table
     // If an invalid quantity is entered then the user will still be at the home page with the error message in the querystring
 
-app.post("/Purchase", function (request, response, next) {
+app.post("/Purchase", function (request, response) {
     var q;
-    var text_qty = false;
+    var text_qty = true;
     for (i = 0; i < products_array.length; i++) {
         q = request.body['quantity' + i];
         if (typeof q != 'undefined') {
-            text_qty = text_qty || (q > 0);
+            if (isNonNegativeInteger(q))  {
+                text_qty = false;
+            }
         }
     }
-    if (text_qty == true) {
+    if (text_qty ==  false) {
         response.redirect("./invoice.html?" + querystring.stringify(request.body));
     } else {
-        response.redirect("./home.html?" + querystring.stringify(request.body) + `&error=You need to select something!`);
+        response.redirect("./home.html?" + querystring.stringify(request.body) + `&error=Invalid%20Quantity`);
     }
 });
 
@@ -58,5 +68,3 @@ app.use(express.static(__dirname + '/public'));
 
 // start server
 app.listen(8080, () => console.log(`listening on port 8080`));
-
-
